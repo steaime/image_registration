@@ -80,7 +80,8 @@ def cross_correlation_shifts(image1, image2, errim1=None, errim2=None,
     image2 = np.nan_to_num(image2)
 
     quiet = kwargs.pop('quiet') if 'quiet' in kwargs else not verbose
-    ccorr = (correlate2d(image1,image2,quiet=quiet,**kwargs) / image1.size)
+    #ccorr = (correlate2d(image1,image2,quiet=quiet,**kwargs) / image1.size)
+    ccorr = (correlate2d(image1,image2,**kwargs) / image1.size)
     # allow for NaNs set by convolve (i.e., ignored pixels)
     ccorr[ccorr!=ccorr] = 0
     if ccorr.shape != image1.shape:
