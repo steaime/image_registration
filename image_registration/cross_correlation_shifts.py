@@ -110,8 +110,11 @@ def cross_correlation_shifts(image1, image2, errim1=None, errim2=None,
             errim1 = np.ones(ccorr.shape) * image1[image1==image1].std()
         if errim2 is None:
             errim2 = np.ones(ccorr.shape) * image2[image2==image2].std()
-        eccorr =( (correlate2d(errim1**2, image2**2,quiet=quiet,**kwargs)+
-                   correlate2d(errim2**2, image1**2,quiet=quiet,**kwargs))**0.5
+        #eccorr =( (correlate2d(errim1**2, image2**2,quiet=quiet,**kwargs)+
+        #           correlate2d(errim2**2, image1**2,quiet=quiet,**kwargs))**0.5
+        #           / image1.size)
+        eccorr =( (correlate2d(errim1**2, image2**2,**kwargs)+
+                   correlate2d(errim2**2, image1**2,**kwargs))**0.5
                    / image1.size)
         if maxoff is not None:
             subeccorr = eccorr[ycen-maxoff:ycen+maxoff+1,xcen-maxoff:xcen+maxoff+1]
